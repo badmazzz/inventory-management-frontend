@@ -13,8 +13,8 @@ export const StoreContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [phone, setPhone] = useState("");
   const [avatar, setAvatar] = useState(null);
+  const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
-  const [city, setCity] = useState("");
   const [password, setPassword] = useState("");
   const [sellAmount, setSellAmount] = useState("");
   const [sellData, setSellData] = useState([]);
@@ -56,10 +56,9 @@ export const StoreContextProvider = ({ children }) => {
 
   const handleRegister = async () => {
     const formData = new FormData();
-    formData.append("username", email.split("@")[0]); // Assuming username is part of the email
+    formData.append("username", username);
     formData.append("email", email);
     formData.append("password", password);
-    formData.append("city", city);
     formData.append("avatar", avatar);
     formData.append("phone", phone);
 
@@ -284,7 +283,39 @@ export const StoreContextProvider = ({ children }) => {
       console.log(err);
       toast.error("Failed to add purchase.");
     }
-    
+  };
+
+  const addSell = async (sellData) => {
+    try {
+      const response = await axios.post(`${server}/sell/add`, sellData);
+      toast.success("Sell added successfully!");
+      fetchSellData();
+      updatePage();
+    } catch (err) {
+      console.log(err);
+      toast.error("Failed to add sell.");
+    }
+  };
+
+  const addStore = async (storeData) => {
+    const formData = new FormData();
+    formData.append("name", storeData.name);
+    formData.append("category", storeData.category);
+    formData.append("address", storeData.address);
+    formData.append("city", storeData.city);
+    formData.append("image", storeData.image);
+
+    try {
+      const response = await axios.post(`${server}/store/add`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      toast.success("Store added successfully");
+      fetchStoresData();
+    } catch (err) {
+      toast.error("Failed to add store");
+    }
   };
 
   const contextValue = {
@@ -293,6 +324,11 @@ export const StoreContextProvider = ({ children }) => {
     setEmail,
     password,
     setPassword,
+    username,
+    setUsername,
+    phone,
+    setPhone,
+    setAvatar,
     handleRegister,
     handleLogout,
     sellAmount,
@@ -322,6 +358,8 @@ export const StoreContextProvider = ({ children }) => {
     deletePurchase,
     updatePurchaseDetails,
     addPurchase,
+    addSell,
+    addStore,
   };
 
   return (

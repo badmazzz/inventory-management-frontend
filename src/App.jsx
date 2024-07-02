@@ -8,6 +8,8 @@ import Layout from "./Component/Layout";
 import Inventory from "./Component/Inventory";
 import PurchaseDetails from "./Component/Purchase";
 import Sells from "./Component/Sell";
+import SignUp from "./Component/Signup";
+import Store from "./Component/Store";
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
       <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<SignUp />} />
           <Route
             path="/"
             element={
@@ -27,6 +30,7 @@ function App() {
             <Route path="/inventory" element={<Inventory />} />
             <Route path="/purchase-details" element={<PurchaseDetails />} />
             <Route path="/sells" element={<Sells />} />
+            <Route path="/manage-store" element={<Store />} />
           </Route>
         </Routes>
       </BrowserRouter>

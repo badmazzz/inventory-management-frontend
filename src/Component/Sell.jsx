@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-// import AddSell from "../components/AddSell";
+import AddSell from "../Component/AddSell";
 import { StoreContext } from "../context/StoreContext";
 
 function Sells() {
@@ -18,7 +18,6 @@ function Sells() {
     fetchStoresData();
   }, [updatePage]);
 
-  // Modal for Sell Add
   const addSellModalSetting = () => {
     setShowSellModal(!showSellModal);
   };
@@ -26,14 +25,7 @@ function Sells() {
   return (
     <div className="col-span-12 lg:col-span-10 flex justify-center">
       <div className="flex flex-col gap-5 w-11/12">
-        {/* {showSellModal && (
-          <AddSell
-            addSellModalSetting={addSellModalSetting}
-            products={products}
-            stores={stores}
-            handlePageUpdate={handlePageUpdate}
-          />
-        )} */}
+        {showSellModal && <AddSell addSellModalSetting={addSellModalSetting} />}
         {/* Table  */}
         <div className="overflow-x-auto rounded-lg border bg-white border-gray-200">
           <div className="flex justify-between pt-5 pb-3 px-3">
