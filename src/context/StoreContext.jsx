@@ -7,7 +7,7 @@ axios.defaults.withCredentials = true;
 
 export const StoreContext = createContext(null);
 
-const server = "http://localhost:4000/api/v1";
+const server = "https://inventory-management-backend-d8rt.onrender.com/api/v1";
 
 export const StoreContextProvider = ({ children }) => {
   const [user, setUser] = useState(null);
